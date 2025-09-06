@@ -19,7 +19,7 @@ if st.button("Generate"):
                 img_b64 = response.json()["image_base64"]
                 img_bytes = base64.b64decode(img_b64)
                 image = Image.open(BytesIO(img_bytes))
-                st.image(image, caption=prompt, use_column_width=True)
+                st.image(image, caption=prompt, use_container_width=True)
             else:
                 st.error("Backend error: " + response.text)
         except Exception as e:
