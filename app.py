@@ -7,16 +7,42 @@ from PIL import Image
 # Replace this with your Colab backend URL
 API_URL = "https://29ecc18fa8fe.ngrok-free.app/generate"
 
-# Page config
-st.set_page_config(page_title="Text to Image Generator", page_icon="🎨", layout="wide")
+# -------------------------------
+# Page Config (compact layout)
+# -------------------------------
+st.set_page_config(
+    page_title="Text to Image Generator",
+    page_icon="🎨",
+    layout="centered",               # switched to centered for a cleaner UI
+    initial_sidebar_state="collapsed"
+)
 
-# Sidebar controls
-st.sidebar.header("⚙️ Settings")
-guidance_scale = st.sidebar.slider("Guidance Scale", 1.0, 15.0, 7.5, 0.5)
-image_size = st.sidebar.radio("Image Size", ["512x512", "768x768"])
-dark_mode = st.sidebar.toggle("🌗 Dark Theme Preview", value=False)
+# -------------------------------
+# Custom CSS (reduce padding/margins)
+# -------------------------------
+st.markdown("""
+    <style>
+    .block-container {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+    </style>
+""", unsafe_allow_html=True)
 
-# Main title
+# -------------------------------
+# Sidebar Controls
+# -------------------------------
+with st.sidebar:
+    st.header("⚙️ Settings")
+    guidance_scale = st.slider("Guidance Scale", 1.0, 15.0, 7.5, 0.5)
+    image_size = st.radio("Image Size", ["512x512", "768x768"])
+    dark_mode = st.toggle("🌗 Dark Theme Preview", value=False)
+
+# -------------------------------
+# Main Title
+# -------------------------------
 st.markdown(
     """
     # 🎨 Text-to-Image Generator
@@ -26,14 +52,18 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Prompt input
+# -------------------------------
+# Prompt Input
+# -------------------------------
 prompt = st.text_area(
     "📝 Enter your creative prompt:",
     "a futuristic city skyline at night with flying cars",
     height=100,
 )
 
-# Generate button
+# -------------------------------
+# Generate Button
+# -------------------------------
 if st.button("🚀 Generate Image"):
     with st.spinner("🎨 Creating your masterpiece... please wait..."):
         try:
@@ -59,7 +89,15 @@ if st.button("🚀 Generate Image"):
         except Exception as e:
             st.error(f"⚠️ Connection failed: {e}")
 
+# -------------------------------
+# Advanced Options (hidden)
+# -------------------------------
+with st.expander("🔧 Advanced Settings"):
+    st.slider("Learning Rate (Demo)", 0.0001, 0.01, 0.001)
+
+# -------------------------------
 # Footer
+# -------------------------------
 st.markdown(
     """
     ---
@@ -68,3 +106,4 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
