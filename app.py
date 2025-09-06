@@ -5,7 +5,7 @@ from io import BytesIO
 from PIL import Image
 
 # Replace this with your Colab backend URL
-API_URL = "https://6552b5e7ddb7.ngrok-free.app/generate"
+API_URL = "https://29ecc18fa8fe.ngrok-free.app/generate"
 
 # Page config
 st.set_page_config(page_title="Text to Image Generator", page_icon="🎨", layout="wide")
