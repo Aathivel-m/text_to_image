@@ -4,7 +4,7 @@ import base64
 from io import BytesIO
 from PIL import Image
 
-API_URL = "https://ae16da4617fa.ngrok-free.app"  # replace with Colab's URL
+API_URL = "https://ae16da4617fa.ngrok-free.app/generate"  # replace with Colab's URL
 
 st.title("🎨 Text-to-Image Generator")
 
