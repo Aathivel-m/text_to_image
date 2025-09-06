@@ -1,24 +1,23 @@
 import streamlit as st
-from diffusers import StableDiffusionPipeline
-import torch
+import requests
+import base64
+from io import BytesIO
+from PIL import Image
 
-@st.cache_resource
-def load_model():
-    model_id = "runwayml/stable-diffusion-v1-5"
-    pipe = StableDiffusionPipeline.from_pretrained(
-        model_id,
-        torch_dtype=torch.float16 if torch.cuda.is_available() else torch.float32
-    )
-    pipe = pipe.to("cuda" if torch.cuda.is_available() else "cpu")
-    return pipe
-
-pipe = load_model()
+API_URL = "https://14c93cfafa4f.ngrok-free.app"  # replace with Colab's URL
 
 st.title("🎨 Text-to-Image Generator")
 
-prompt = st.text_input("Enter your prompt:", "a sunset over the mountains with a river flowing")
+prompt = st.text_input("Enter your prompt:", "a castle in the clouds at sunrise")
 
 if st.button("Generate"):
-    with st.spinner("Generating... Please wait..."):
-        image = pipe(prompt, guidance_scale=7.5).images[0]
-        st.image(image, caption=prompt, use_column_width=True)
+    with st.spinner("Talking to Colab backend..."):
+        response = requests.post(API_URL, json={"text": prompt})
+        if response.status_code == 200:
+            img_b64 = response.json()["image_base64"]
+            img_bytes = base64.b64decode(img_b64)
+            image = Image.open(BytesIO(img_bytes))
+            st.image(image, caption=prompt, use_column_width=True)
+        else:
+            st.error("Backend error: " + response.text)
+
