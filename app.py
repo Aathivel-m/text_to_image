@@ -5,7 +5,7 @@ from io import BytesIO
 from PIL import Image
 
 # Replace this with your Colab backend URL
-API_URL = "https://29ecc18fa8fe.ngrok-free.app/generate"
+API_URL = "https://16a267aad5ed.ngrok-free.app/generate"
 
 # -------------------------------
 # Page Config (compact layout)
