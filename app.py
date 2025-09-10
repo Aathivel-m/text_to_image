@@ -5,11 +5,10 @@ from io import BytesIO
 from PIL import Image
 
 # Replace this with your Colab backend URL
+
 API_URL = "https://35886bb86744.ngrok-free.app/generate"
 
-# -------------------------------
-# Page Config (compact layout)
-# -------------------------------
+
 st.set_page_config(
     page_title="Text to Image Generator",
     page_icon="🎨",
@@ -17,9 +16,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# -------------------------------
-# Custom CSS (reduce padding/margins)
-# -------------------------------
+
 st.markdown("""
     <style>
     .block-container {
@@ -31,18 +28,14 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# -------------------------------
-# Sidebar Controls
-# -------------------------------
+
 with st.sidebar:
     st.header("⚙️ Settings")
     guidance_scale = st.slider("Guidance Scale", 1.0, 15.0, 7.5, 0.5)
     image_size = st.radio("Image Size", ["512x512", "768x768"])
     dark_mode = st.toggle("🌗 Dark Theme Preview", value=False)
 
-# -------------------------------
-# Main Title
-# -------------------------------
+
 st.markdown(
     """
     # 🎨 Text-to-Image Generator
@@ -52,18 +45,14 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# -------------------------------
-# Prompt Input
-# -------------------------------
+
 prompt = st.text_area(
     "📝 Enter your creative prompt:",
     "a futuristic city skyline at night with flying cars",
     height=100,
 )
 
-# -------------------------------
-# Generate Button
-# -------------------------------
+
 if st.button("🚀 Generate Image"):
     with st.spinner("🎨 Creating your masterpiece... please wait..."):
         try:
@@ -89,15 +78,11 @@ if st.button("🚀 Generate Image"):
         except Exception as e:
             st.error(f"⚠️ Connection failed: {e}")
 
-# -------------------------------
-# Advanced Options (hidden)
-# -------------------------------
+
 with st.expander("🔧 Advanced Settings"):
     st.slider("Learning Rate (Demo)", 0.0001, 0.01, 0.001)
 
-# -------------------------------
-# Footer
-# -------------------------------
+
 st.markdown(
     """
     ---
