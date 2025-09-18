@@ -6,7 +6,7 @@ from PIL import Image
 
 # Replace this with your Colab backend URL
 
-API_URL = "https://35886bb86744.ngrok-free.app/generate"
+API_URL = "https://75e93ea2b912.ngrok-free.app/generate"
 
 
 st.set_page_config(
